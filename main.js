@@ -319,8 +319,43 @@ var geneButton = (function() {
 		output.rows = 30;
 		output.cols = 120;
 		txt += app.maps.bgMap.getDataCode('backgroundMap', app.imagePath);
-		output.value = txt;
-		w.document.body.appendChild(output);
+
+
+        //マップタイルの数値に対応していないので、フィルターにかける
+        const replaced = txt
+
+        //配列の途中の数字にマッチ
+            .replace(/(39)(?!\d)/g, ',0,')//水
+            .replace(/(12)(?!\d)/g, ',6,')//岩 影なし
+            .replace(/(13)(?!\d)/g, ',7,')//石壁 影なし
+            .replace(/(29)(?!\d)/g, ',22,')//岩 影あり
+            .replace(/(46)(?!\d)/g, ',38,')//テーブル
+            .replace(/(30)(?!\d)/g, ',23,')//石壁 影あり
+            .replace(/(107)/g, '1')//草
+            .replace(/(284)/g, '11')//壺
+            .replace(/(285)/g, '12')//茶色いもっこり
+            .replace(/(286)/g, '13')//階段
+            .replace(/(301)/g, '27')//宝箱
+            .replace(/(302)/g, '28')//お花
+            .replace(/(303)/g, '29')//下がる階段
+            .replace(/(318)/g, '43')//ろうそく
+            .replace(/(319)/g, '44')//穴
+            .replace(/(320)/g, '45')//半分石壁
+            .replace(/(355)/g, '59')//看板上半分
+            .replace(/(336)/g, '60')//大木左上
+            .replace(/(337)/g, '61')//大木右上
+            .replace(/(352)/g, '75')//看板下半分
+            .replace(/(353)/g, '76')//大木左下
+            .replace(/(354)/g, '77')//大木右下
+            .replace(/(369)/g, '91')//お城
+            .replace(/(370)/g, '92')//町
+            .replace(/(371)/g, '93')//ダンジョン入り口
+            .replace(/(386)/g, '107');//小さな木
+
+
+        console.log(replaced);
+        output.value = replaced;
+        w.document.body.appendChild(output);
 	};
 	return element;
 })();
